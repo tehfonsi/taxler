@@ -1,3 +1,8 @@
-import { readFile } from './io/common-io';
+import Coingecko from './apis/coingecko';
 
-console.log(readFile('./test/data/polygonscan.com/rndr.csv'));
+const coingecko = new Coingecko();
+const date = new Date();
+date.setDate(1);
+date.setMonth(7);
+date.setFullYear(2021);
+coingecko.getPrice('rndr', date).then((id) => console.log(id));
