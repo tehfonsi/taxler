@@ -4,7 +4,7 @@ import Api from './api';
 const BASE_URL = 'https://api.coingecko.com/api/v3';
 
 export default class Coingecko extends Api {
-  public async findMatch(name: string) {
+  public async findMatch(name: string): Promise<string | null> {
     name = name.toLowerCase();
     const list = (await this.getJson(
       BASE_URL + '/coins/list?include_platform=false'

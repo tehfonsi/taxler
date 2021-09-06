@@ -1,8 +1,11 @@
-import Coingecko from './apis/coingecko';
+import Polygonscan from './plugins/polygonscan';
 
-const coingecko = new Coingecko();
-const date = new Date();
-date.setDate(1);
-date.setMonth(7);
-date.setFullYear(2021);
-coingecko.getPrice('rndr', date).then((id) => console.log(id));
+const polygonScan = new Polygonscan('./test/data/polygonscan/rndr.csv');
+polygonScan.getReport().then((report: string[][]) => {
+  let income = 0.0;
+  report.forEach((line: string[]) => {
+    income += parseFloat(line[4]);
+    console.log(line.join());
+  });
+  console.log(income);
+});
