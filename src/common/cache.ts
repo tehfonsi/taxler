@@ -5,7 +5,7 @@ export default class Cache {
 
   public static write(key: string, value: string) {
     key = encodeURIComponent(key);
-    CommonIO.createDir(Cache.CACHE_DIRECTORY);
+    CommonIO.createDirectory(Cache.CACHE_DIRECTORY);
     const path = this.getPath(key);
     CommonIO.writeFile(path, value);
   }

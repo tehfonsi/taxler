@@ -2,7 +2,7 @@ import CommonIO from './common-io';
 import { EOL } from 'os';
 
 export default class CSVReader {
-  public read(
+  public static read(
     path: string,
     seperator: string = ',',
     skipFirst: boolean = true

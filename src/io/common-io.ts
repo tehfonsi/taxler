@@ -9,7 +9,7 @@ export default class CommonIO {
     fs.writeFileSync(path, content);
   }
 
-  static createDir(path: string) {
+  static createDirectory(path: string) {
     const exists = fs.existsSync(path);
     if (!exists) {
       fs.mkdirSync(path);
@@ -18,5 +18,18 @@ export default class CommonIO {
 
   static exists(path: string) {
     return fs.existsSync(path);
+  }
+
+  static getDirectories(path: string) {
+    return fs
+      .readdirSync(path, { withFileTypes: true })
+      .filter((dirent: fs.Dirent) => dirent.isDirectory())
+      .map((dirent: fs.Dirent) => dirent.name);
+  }
+
+  static getFiles(path: string) {
+    return fs
+      .readdirSync(path, { withFileTypes: true })
+      .map((dirent: fs.Dirent) => dirent.name);
   }
 }
