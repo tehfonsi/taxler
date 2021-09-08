@@ -1,6 +1,7 @@
 # Taxler specific
 _cache/*
 config.json
+*report.csv
 
 # Logs
 logs
