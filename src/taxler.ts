@@ -10,6 +10,23 @@ export default class Taxler {
     this._path = path;
   }
 
+  public setPath(path: string | undefined) {
+    if (path) {
+      this._path = path.endsWith('/') ? path : path + '/';
+    }
+  }
+
+  public init() {
+    const pluginList: Plugin[] = PluginRegistry.getPlugins();
+    const directoryList = [];
+    for (const plugin of pluginList) {
+      for (const name of plugin.getNames()) {
+        directoryList.push(name);
+      }
+    }
+    console.log(directoryList);
+  }
+
   private async _getReport(): Promise<string[][]> {
     const directories = CommonIO.getDirectories(this._path);
     const report: string[][] = [];
@@ -35,10 +52,10 @@ export default class Taxler {
     return report;
   }
 
-  async csvReport() {
+  public async csvReport() {
     const report = await this._getReport();
     let csvReport: string =
-      'Date, Type, Name, Coin, Amount, Price, Total' + EOL;
+      'Date, Type, Name, Coin, Amount, Price, Total, Taxes' + EOL;
 
     for (let line of report) {
       csvReport += line.join(',') + EOL;
@@ -47,19 +64,21 @@ export default class Taxler {
     CommonIO.writeFile(this._path + 'report.csv', csvReport);
   }
 
-  async printReport() {
+  public async printReport() {
     this._print(await this._getReport());
   }
 
   private _print(report: string[][]) {
     let amount = 0.0;
     let income = 0.0;
+    let taxes = 0.0;
     report.forEach((line: string[]) => {
       amount += parseFloat(line[4]);
       income += parseFloat(line[6]);
+      taxes += parseFloat(line[7]);
       console.log(line.join());
     });
-    console.log(amount + ',' + income);
+    console.log(amount + ', ' + income + ', ' + taxes);
   }
 
   private _getPlugin(name: string): Plugin | undefined {
