@@ -1,12 +1,12 @@
 {
   "name": "taxler",
   "version": "1.0.0",
-  "description": "Crypto taxes for trading, liquidity mining, staking and lending.",
+  "description": "Crypto taxes for trading, mining, liquidity mining, staking and lending.",
   "main": "index.js",
   "scripts": {
     "start": "npm run build:watch",
     "build": "tsc -p .",
-    "build:watch": "nodemon --watch \"src/**/*.ts\" --exec \"ts-node\" src/index.ts"
+    "build:watch": "nodemon -r dotenv/config --watch \"src/**/*.ts\" --exec \"ts-node\" src/index.ts"
   },
   "repository": {
     "type": "git",
@@ -22,11 +22,14 @@
   "devDependencies": {
     "@types/node": "^16.7.10",
     "@types/node-fetch": "^2.5.12",
+    "@types/yargs": "^17.0.2",
+    "dotenv": "^10.0.0",
     "nodemon": "^2.0.12",
     "ts-node": "^10.2.1",
     "typescript": "^4.4.2"
   },
   "dependencies": {
-    "node-fetch": "2.6.1"
+    "node-fetch": "2.6.1",
+    "yargs": "^17.1.1"
   }
 }

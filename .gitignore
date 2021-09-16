@@ -2,6 +2,7 @@
 _cache/*
 config.json
 *report.csv
+lib/*
 
 # Logs
 logs

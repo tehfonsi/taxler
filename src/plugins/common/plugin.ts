@@ -1,5 +1,6 @@
 import { EOL } from 'os';
 import Coingecko from '../../apis/coingecko';
+import Config from '../../common/config';
 import { formateReportDate } from '../../common/utils';
 import CommonIO from '../../io/common-io';
 import CSVReader from '../../io/csv-reader';
@@ -11,10 +12,15 @@ export enum TRANSACTION_TYPE {
   LENDING = 'Lending',
   STAKING = 'Staking',
   TRADING = 'Trading',
+  TRANSFER = 'Transfer',
+  BUY = 'Buy',
+  SELL = 'Sell',
   GIFT = 'Gift',
 }
 
 const DECIMAL_PLACES = 10;
+
+const REPORT_FILE = '_report.csv';
 
 export default abstract class Plugin {
   protected _api = new Coingecko();
@@ -32,10 +38,7 @@ export default abstract class Plugin {
     price: number,
     total?: number
   ): string[] {
-    const _total =
-      total === undefined
-        ? (amount * price).toFixed(DECIMAL_PLACES)
-        : total.toFixed(DECIMAL_PLACES);
+    const _total = total === undefined ? amount * price : total;
     const _price = price > 0 ? price.toFixed(DECIMAL_PLACES) : '0';
     return [
       formateReportDate(date),
@@ -44,7 +47,8 @@ export default abstract class Plugin {
       coin,
       amount.toFixed(DECIMAL_PLACES),
       _price,
-      _total,
+      _total.toFixed(DECIMAL_PLACES),
+      this._calculateTax(_total, type).toFixed(DECIMAL_PLACES),
     ];
   }
 
@@ -55,11 +59,14 @@ export default abstract class Plugin {
 
     for (const file of files) {
       const filePath = path + '/' + file;
+      if (file.includes(REPORT_FILE)) {
+        continue;
+      }
       const fileReport = await this._readFile(filePath);
-      this._writeFileReport(
-        filePath.replace('.csv', '_report.csv'),
-        fileReport
-      );
+      if (fileReport.length === 0) {
+        console.warn(`Possible problems with report for ${file}`);
+      }
+      this._writeFileReport(filePath.replace('.csv', REPORT_FILE), fileReport);
       fileReport.forEach((row) => report.push(row));
     }
 
@@ -89,5 +96,32 @@ export default abstract class Plugin {
     }
 
     return report;
+  }
+
+  private _calculateTax(value: number, type: TRANSACTION_TYPE) {
+    const config = Config.get();
+    if (!config.taxes) {
+      return 0;
+    }
+    const taxes = config.taxes;
+    if (type === TRANSACTION_TYPE.MINING) {
+      return value * taxes.mining;
+    }
+    if (type === TRANSACTION_TYPE.TRADING) {
+      return value * taxes.trading;
+    }
+    if (type === TRANSACTION_TYPE.STAKING) {
+      return value * taxes.staking;
+    }
+    if (type === TRANSACTION_TYPE.LENDING) {
+      return value * taxes.lending;
+    }
+    if (type === TRANSACTION_TYPE.LIQUIDITY_MINING) {
+      return value * taxes.liquidityMining;
+    }
+    if (type === TRANSACTION_TYPE.GIFT) {
+      return value * taxes.gift;
+    }
+    return 0;
   }
 }

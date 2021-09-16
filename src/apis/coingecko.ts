@@ -12,6 +12,8 @@ export default class Coingecko extends Api {
     const coin = list.find((coin: any) => coin.symbol.toLowerCase() === name);
     if (coin) {
       return coin.id;
+    } else {
+      console.warn(`Coin ${name} not found!`);
     }
     return null;
   }
