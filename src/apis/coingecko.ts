@@ -1,9 +1,12 @@
-import ConfigHandler from '../common/config-handler';
+import { Config } from '../common/config';
+import { DI } from '../di.config';
 import Api from './api';
 
 const BASE_URL = 'https://api.coingecko.com/api/v3';
 
 export default class Coingecko extends Api {
+  private _config: Config = DI().get('Config');
+
   public async findMatch(name: string): Promise<string | null> {
     name = name.toLowerCase();
     const list = (await this.getJson(
@@ -28,6 +31,9 @@ export default class Coingecko extends Api {
     const data = await this.getJson(
       `${BASE_URL}/coins/${coinId}/history?date=${dateString}`
     );
-    return data.market_data.current_price[ConfigHandler.get().fiat];
+    return data.market_data.current_price[this._config.fiat];
   }
+}
+function Config(Config: any) {
+  throw new Error('Function not implemented.');
 }

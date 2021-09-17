@@ -1,13 +1,22 @@
 #!/usr/bin/env node
+import 'reflect-metadata';
 import Taxler from './taxler';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
+import { initDI } from './di.config';
+
+const getTaxler = (path: string) => {
+  path = path.endsWith('/') ? path : path + '/';
+  initDI(path);
+  const taxler = new Taxler();
+  taxler.setPath(path as string);
+  return taxler;
+};
 
 const init = async () => {
   const defaultPath =
     process.env.NODE_ENV === 'development' ? 'test/data/' : '.';
 
-  const taxler = new Taxler();
   const argv = await yargs(hideBin(process.argv))
     .scriptName('taxler')
     .usage('taxler')
@@ -23,16 +32,17 @@ const init = async () => {
       'Setup the current folder, see --path',
       async (yargs) => {
         const { path } = await yargs.argv;
-        taxler.setPath(path as string);
-        console.log(`init the repo on path ${path}`);
+        const taxler = getTaxler(path as string);
+        taxler.init();
       }
     ).argv;
 
   if (!argv._.length) {
     const { path } = argv;
-    taxler.setPath(path as string);
+    const taxler = getTaxler(path as string);
     taxler.printReport();
     taxler.csvReport();
+    // taxler.init();
   }
 };
 init();

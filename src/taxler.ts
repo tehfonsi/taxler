@@ -2,18 +2,15 @@ import CommonIO from './io/common-io';
 import PluginRegistry from './plugins/plugin-registry';
 import Plugin from './plugins/common/plugin';
 import { EOL } from 'os';
+import { injectable } from 'inversify';
+import ConfigHelper from './common/config';
 
+@injectable()
 export default class Taxler {
   private _path: string;
 
-  constructor(path: string = '.') {
+  public setPath(path: string) {
     this._path = path;
-  }
-
-  public setPath(path: string | undefined) {
-    if (path) {
-      this._path = path.endsWith('/') ? path : path + '/';
-    }
     CommonIO.createDirectory(this._path);
   }
 
@@ -24,6 +21,8 @@ export default class Taxler {
         CommonIO.createDirectory(this._path + name);
       }
     }
+
+    ConfigHelper.initConfig(this._path);
   }
 
   private async _getReport(): Promise<string[][]> {

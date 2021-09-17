@@ -1,7 +1,8 @@
 import { EOL } from 'os';
 import Coingecko from '../../apis/coingecko';
-import ConfigHandler from '../../common/config-handler';
+import { Config } from '../../common/config';
 import { formateReportDate } from '../../common/utils';
+import { DI } from '../../di.config';
 import CommonIO from '../../io/common-io';
 import CSVReader from '../../io/csv-reader';
 
@@ -23,6 +24,7 @@ const DECIMAL_PLACES = 10;
 const REPORT_FILE = '_report.csv';
 
 export default abstract class Plugin {
+  private _config: Config = DI().get('Config');
   protected _api = new Coingecko();
 
   public abstract getNames(): string[];
@@ -99,7 +101,7 @@ export default abstract class Plugin {
   }
 
   private _calculateTax(value: number, type: TRANSACTION_TYPE) {
-    const config = ConfigHandler.get();
+    const config = this._config;
     if (!config.taxes) {
       return 0;
     }
