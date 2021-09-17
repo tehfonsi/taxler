@@ -1,7 +1,7 @@
 import CommonIO from '../io/common-io';
 
-export interface ConfigDefinition {
-  fiat: number;
+export interface Config {
+  fiat: string;
   taxes: {
     mining: number;
     trading: number;
@@ -12,10 +12,22 @@ export interface ConfigDefinition {
   };
 }
 
-export default class Config {
-  private static _configJson: ConfigDefinition;
+export const DEFAULT_CONFIG: Config = {
+  fiat: 'EUR',
+  taxes: {
+    mining: 0,
+    trading: 0,
+    staking: 0,
+    lending: 0,
+    liquidityMining: 0,
+    gift: 0,
+  },
+};
 
-  public static get(): ConfigDefinition {
+export default class ConfigHandler {
+  private static _configJson: Config;
+
+  public static get(): Config {
     if (!this._configJson) {
       this._configJson = JSON.parse(CommonIO.readFile('config.json'));
     }

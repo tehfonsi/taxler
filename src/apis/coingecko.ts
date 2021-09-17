@@ -1,4 +1,4 @@
-import Config from '../common/config';
+import ConfigHandler from '../common/config-handler';
 import Api from './api';
 
 const BASE_URL = 'https://api.coingecko.com/api/v3';
@@ -28,6 +28,6 @@ export default class Coingecko extends Api {
     const data = await this.getJson(
       `${BASE_URL}/coins/${coinId}/history?date=${dateString}`
     );
-    return data.market_data.current_price[Config.get().fiat];
+    return data.market_data.current_price[ConfigHandler.get().fiat];
   }
 }

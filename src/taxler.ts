@@ -14,17 +14,16 @@ export default class Taxler {
     if (path) {
       this._path = path.endsWith('/') ? path : path + '/';
     }
+    CommonIO.createDirectory(this._path);
   }
 
   public init() {
     const pluginList: Plugin[] = PluginRegistry.getPlugins();
-    const directoryList = [];
     for (const plugin of pluginList) {
       for (const name of plugin.getNames()) {
-        directoryList.push(name);
+        CommonIO.createDirectory(this._path + name);
       }
     }
-    console.log(directoryList);
   }
 
   private async _getReport(): Promise<string[][]> {

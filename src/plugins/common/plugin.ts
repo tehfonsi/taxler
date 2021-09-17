@@ -1,6 +1,6 @@
 import { EOL } from 'os';
 import Coingecko from '../../apis/coingecko';
-import Config from '../../common/config';
+import ConfigHandler from '../../common/config-handler';
 import { formateReportDate } from '../../common/utils';
 import CommonIO from '../../io/common-io';
 import CSVReader from '../../io/csv-reader';
@@ -99,7 +99,7 @@ export default abstract class Plugin {
   }
 
   private _calculateTax(value: number, type: TRANSACTION_TYPE) {
-    const config = Config.get();
+    const config = ConfigHandler.get();
     if (!config.taxes) {
       return 0;
     }
