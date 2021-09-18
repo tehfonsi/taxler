@@ -15,6 +15,16 @@
     "taxler.js",
     "index.js"
   ],
+  "keywords": [
+    "crypto",
+    "trading",
+    "mining",
+    "cryptocurrency",
+    "taxes",
+    "lending",
+    "staking",
+    "liquidity-mining"
+  ],
   "scripts": {
     "start": "npm run build:watch",
     "build": "run-s compile copy-package copy-readme",
@@ -27,7 +37,6 @@
     "type": "git",
     "url": "git+https://github.com/tehfonsi/taxler.git"
   },
-  "keywords": [],
   "author": "Stephan Schober",
   "license": "ISC",
   "bugs": {
