@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run build:watch",
-    "build": "run-s compile copy-package",
-    "copy-package": "shx cp package.json ./lib/",
+    "build": "run-s compile copy-package copy-readme",
+    "copy-package": "shx cp package.json lib/",
+    "copy-readme": "shx cp README.md lib/",
     "compile": "tsc -p .",
     "build:watch": "nodemon -r dotenv/config --watch \"src/**/*.ts\" --exec \"ts-node\" src/index.ts"
   },
@@ -15,7 +16,7 @@
     "url": "git+https://github.com/tehfonsi/taxler.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Stephan Schober",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/tehfonsi/taxler/issues"
