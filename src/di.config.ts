@@ -8,6 +8,7 @@ export const initDI = (path: string = '.') => {
 
   container = new Container();
 
+  container.bind<string>('Path').toConstantValue(path);
   container.bind<Config>('Config').toConstantValue(config);
 };
 

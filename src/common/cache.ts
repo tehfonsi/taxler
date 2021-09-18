@@ -1,11 +1,18 @@
+import { DI } from '../di.config';
 import CommonIO from '../io/common-io';
 
 export default class Cache {
-  static CACHE_DIRECTORY = './_cache';
+  private static CACHE_DIRECTORY: string;
 
+  public static getCacheDirectory() {
+    if (!this.CACHE_DIRECTORY) {
+      this.CACHE_DIRECTORY = (DI().get('Path') as string) + '.cache';
+    }
+    return this.CACHE_DIRECTORY;
+  }
   public static write(key: string, value: string) {
     key = encodeURIComponent(key);
-    CommonIO.createDirectory(Cache.CACHE_DIRECTORY);
+    CommonIO.createDirectory(this.getCacheDirectory());
     const path = this.getPath(key);
     CommonIO.writeFile(path, value);
   }
@@ -20,6 +27,6 @@ export default class Cache {
   }
 
   private static getPath(key: string) {
-    return Cache.CACHE_DIRECTORY + '/' + key;
+    return this.getCacheDirectory() + '/' + key;
   }
 }

@@ -14,8 +14,8 @@ const getTaxler = (path: string) => {
 };
 
 const init = async () => {
-  const defaultPath =
-    process.env.NODE_ENV === 'development' ? 'test/data/' : '.';
+  const isDev = process.env.NODE_ENV === 'development';
+  const defaultPath = isDev ? 'test/data/' : '.';
 
   const argv = await yargs(hideBin(process.argv))
     .scriptName('taxler')
@@ -40,9 +40,12 @@ const init = async () => {
   if (!argv._.length) {
     const { path } = argv;
     const taxler = getTaxler(path as string);
-    taxler.printReport();
-    taxler.csvReport();
-    // taxler.init();
+    if (isDev) {
+      taxler.csvReport();
+      taxler.printReport();
+    } else {
+      taxler.csvReport();
+    }
   }
 };
 init();
