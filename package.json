@@ -3,6 +3,18 @@
   "version": "1.0.0",
   "description": "Crypto taxes for trading, mining, liquidity mining, staking and lending.",
   "main": "index.js",
+  "bin": {
+    "taxler": "index.js"
+  },
+  "files": [
+    "apis",
+    "common",
+    "io",
+    "plugins",
+    "di.config.js",
+    "taxler.js",
+    "index.js"
+  ],
   "scripts": {
     "start": "npm run build:watch",
     "build": "run-s compile copy-package copy-readme",
