@@ -22,8 +22,13 @@ Crypto taxes for 	~~trading~~ (not yet), mining, liquidity mining, staking and l
 - [CakeDefi](./src/plugins/cakedefi.ts)
 - [BlockFi](./src/plugins/blockfi.ts)
 - [Etherscan/Polygonscan](./src/plugins/etherscan.ts)
-- [CakeDefi](./src/plugins/cakedefi.ts)
 
+## Contribute
+
+You can contribute to this project by writing a new plugin.
+It is as easy as creating a new file in the [Plugin Folder](./src/plugins) and then register it in the [Plugin Registry](./src/plugins/plugin-registry.ts).
+
+It just requires a few lines of code, take a look at the plugins listed above by clicking on them.
 
 ## Support this project
 
