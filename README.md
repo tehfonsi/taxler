@@ -17,6 +17,10 @@ Crypto taxes for 	~~trading~~ (not yet), mining, liquidity mining, staking and l
   npx taxler
   ```
 
+## Demo
+
+Open the [Stackblitz Taxler Demo](https://stackblitz.com/edit/taxler-demo-1-0-4?devtoolsheight=33&file=README.md) and follow the instructions in the `README` file.
+
 ## Current plugins
 
 - [CakeDefi](./src/plugins/cakedefi.ts)
