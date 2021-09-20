@@ -36,7 +36,9 @@ It just requires a few lines of code, take a look at the plugins listed above by
 
 ## Support this project
 
-Please use my referral code when signin to
+You can donate any ETH based coins using my ETH address: `0xf675F37AA8Db2d0424EB173BF5F10a33FCB27270`
+
+Also please use my referral code when creating an account for
 - [CakeDefi](https://app.cakedefi.com/?ref=604069) - Code `604069`
 - [BlockFi](https://blockfi.com/?ref=ce5c942d) - Code `ce5c942d`
 
