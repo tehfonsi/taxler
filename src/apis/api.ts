@@ -8,8 +8,11 @@ export default class Api {
       return JSON.parse(cachedText);
     }
     const response = await fetch(url);
-    const text = await response.text();
-    Cache.write(url, text);
-    return JSON.parse(text);
+    if (response && response.status === 200) {
+      const text = await response.text();
+      Cache.write(url, text);
+      return JSON.parse(text);
+    }
+    return null;
   }
 }

@@ -67,16 +67,17 @@ export default class Taxler {
   }
 
   private _print(report: string[][]) {
-    let amount = 0.0;
     let income = 0.0;
     let taxes = 0.0;
     report.forEach((line: string[]) => {
-      amount += parseFloat(line[4]);
-      income += parseFloat(line[6]);
+      const type = line[1];
+      if (type !== 'Deposit' && type !== 'Withdraw') {
+        income += parseFloat(line[6]);
+      }
       taxes += parseFloat(line[7]);
       console.log(line.join());
     });
-    console.log(amount + ', ' + income + ', ' + taxes);
+    console.log(income + ', ' + taxes);
   }
 
   private _getPlugin(name: string): Plugin | undefined {

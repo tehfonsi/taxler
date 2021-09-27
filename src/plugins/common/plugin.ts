@@ -13,10 +13,11 @@ export enum TRANSACTION_TYPE {
   LENDING = 'Lending',
   STAKING = 'Staking',
   TRADING = 'Trading',
-  TRANSFER = 'Transfer',
   BUY = 'Buy',
   SELL = 'Sell',
   GIFT = 'Gift',
+  DEPOSIT = 'Deposit',
+  WITHDRAW = 'Withdraw',
 }
 
 const DECIMAL_PLACES = 10;

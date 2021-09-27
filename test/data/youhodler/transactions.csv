@@ -1,0 +1,23 @@
+TransactionId,AccountId,User,Status,Type,Ticker,Version,Amount,Fee,TxHash,CreatedAt
+f0b7f6ed-44d2-4241-a4b8-90d4f63ee4af,c6f801a7-c2c6-46b8-b92a-6eff5415dd9c,test@example.com,Success,Exchange,usdt,omni,1012.1,2.02,b1522e85-db23-4b63-82f6-64cea41df76f,5/18/21 14:08
+1677b866-6768-43d2-b8a8-765b402a13ca,c6f801a7-c2c6-46b8-b92a-6eff5415dd9c,test@example.com,Success,Savings earned,usdt,-,2.45,-,-,5/15/21 19:41
+1677b866-6768-43d2-b8a8-765b402a13ca,c6f801a7-c2c6-46b8-b92a-6eff5415dd9c,test@example.com,Success,Savings earned,xlm,-,1.728761,-,-,3/27/21 19:31
+1677b866-6768-43d2-b8a8-765b402a13ca,c6f801a7-c2c6-46b8-b92a-6eff5415dd9c,test@example.com,Success,Savings earned,btc,-,0.000141,-,-,3/27/21 19:31
+1677b866-6768-43d2-b8a8-765b402a13ca,c6f801a7-c2c6-46b8-b92a-6eff5415dd9c,test@example.com,Success,Savings earned,usdt,-,1.95,-,-,3/27/21 19:31
+6d1f3c96-98fe-4eb3-b0cc-a40ad8347507,c6f801a7-c2c6-46b8-b92a-6eff5415dd9c,test@example.com,Success,Exchange,eur,-,1000,5,11471db4-3b7a-4ed0-89a7-0deb1a5d481f,3/25/21 12:05
+c41e1527-fdb2-48f4-8fb2-31b5c73b89e5,c6f801a7-c2c6-46b8-b92a-6eff5415dd9c,test@example.com,Success,Exchange,eur,-,1000,5,dad91de4-0336-4958-86c8-e316c196bc97,3/23/21 17:09
+37f54bf9-e1f9-4ead-9bcb-bc5a54101d29,c6f801a7-c2c6-46b8-b92a-6eff5415dd9c,test@example.com,Success,Deposit,eur,-,4000,-,25816339-196d-4c32-9bbe-2b61f3f4b52f,3/23/21 14:42
+158ea38c-fd8b-41f5-898a-fcf58102a129,c6f801a7-c2c6-46b8-b92a-6eff5415dd9c,test@example.com,Success,Withdrawal,btc,origin,0.01,0,7e794f090588898f98b1d5814117e7d51cc27ab7f1322cc1172973d4dfbe48bd,3/22/21 16:53
+1677b866-6768-43d2-b8a8-765b402a13ca,c6f801a7-c2c6-46b8-b92a-6eff5415dd9c,test@example.com,Success,Savings earned,btc,-,0.000134,-,-,3/20/21 19:30
+1677b866-6768-43d2-b8a8-765b402a13ca,c6f801a7-c2c6-46b8-b92a-6eff5415dd9c,test@example.com,Success,Savings earned,usdt,-,1.99,-,-,3/20/21 19:30
+1677b866-6768-43d2-b8a8-765b402a13ca,c6f801a7-c2c6-46b8-b92a-6eff5415dd9c,test@example.com,Success,Savings earned,xlm,-,1.768397,-,-,3/20/21 19:30
+1677b866-6768-43d2-b8a8-765b402a13ca,c6f801a7-c2c6-46b8-b92a-6eff5415dd9c,test@example.com,Success,Savings earned,usdt,-,0.37,-,-,3/13/21 19:27
+1677b866-6768-43d2-b8a8-765b402a13ca,c6f801a7-c2c6-46b8-b92a-6eff5415dd9c,test@example.com,Success,Savings earned,xlm,-,1.441968,-,-,3/13/21 19:27
+9bc472e4-807d-49d4-bb87-30b977cc305d,c6f801a7-c2c6-46b8-b92a-6eff5415dd9c,test@example.com,Success,Exchange,xlm,-,1925.646586,9.628232,52259380-0204-4ab0-a87c-ac4896a5f95a,3/10/21 8:08
+058ce0ef-baff-4f89-82ac-0f846a76c8eb,c6f801a7-c2c6-46b8-b92a-6eff5415dd9c,test@example.com,Success,Deposit,xlm,-,1918.943597,-,121b1308de44d3a5b0a9685ca3956969257c1b8f2574f10ca82d9c6d205e3e78,3/10/21 8:07
+1677b866-6768-43d2-b8a8-765b402a13ca,c6f801a7-c2c6-46b8-b92a-6eff5415dd9c,test@example.com,Success,Savings earned,btc,-,0.000131,-,-,3/6/21 19:27
+1677b866-6768-43d2-b8a8-765b402a13ca,c6f801a7-c2c6-46b8-b92a-6eff5415dd9c,test@example.com,Success,Savings earned,xlm,-,1.730141,-,-,3/6/21 19:27
+1677b866-6768-43d2-b8a8-765b402a13ca,c6f801a7-c2c6-46b8-b92a-6eff5415dd9c,test@example.com,Success,Savings earned,xlm,-,1.728791,-,-,2/27/21 19:25
+1677b866-6768-43d2-b8a8-765b402a13ca,c6f801a7-c2c6-46b8-b92a-6eff5415dd9c,test@example.com,Success,Savings earned,xlm,-,1.72723,-,-,2/20/21 19:22
+1677b866-6768-43d2-b8a8-765b402a13ca,c6f801a7-c2c6-46b8-b92a-6eff5415dd9c,test@example.com,Success,Savings earned,xlm,-,1.725847,-,-,2/13/21 19:21
+9199e32a-fabc-4d00-a800-cef9734cdc65,c6f801a7-c2c6-46b8-b92a-6eff5415dd9c,test@example.com,Success,Deposit,xlm,-,1999.79098,-,e5d58f595247e7b3c65fb388c4197ac61c5628fc85d2821553d2cc3f0e31e98c,2/6/21 19:20

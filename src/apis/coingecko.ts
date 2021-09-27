@@ -12,6 +12,9 @@ export default class Coingecko extends Api {
     const list = (await this.getJson(
       BASE_URL + '/coins/list?include_platform=false'
     )) as Array<any>;
+    if (!list) {
+      return Promise.resolve(null);
+    }
     const coin = list.find((coin: any) => coin.symbol.toLowerCase() === name);
     if (coin) {
       return coin.id;
@@ -31,6 +34,9 @@ export default class Coingecko extends Api {
     const data = await this.getJson(
       `${BASE_URL}/coins/${coinId}/history?date=${dateString}`
     );
+    if (!data) {
+      return null;
+    }
     return data.market_data.current_price[this._config.fiat];
   }
 }
