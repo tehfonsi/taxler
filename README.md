@@ -1,5 +1,5 @@
 # Taxler
-Crypto taxes for 	~~trading~~ (not yet), mining, liquidity mining, staking and lending. Taxler is currently an alpha version and there is no guarantee that calculations are correct and complete. Use at your own risk.
+Calculate your crypto taxes for ~~trading~~ (not yet), mining, liquidity mining, staking and lending. Taxler is currently an alpha version and there is no guarantee that calculations are correct and complete. Use at your own risk.
 
 ![npm](https://img.shields.io/npm/v/taxler)
 
@@ -26,6 +26,7 @@ Open the [Stackblitz Taxler Demo](https://stackblitz.com/edit/taxler-demo-1-0-4?
 - [CakeDefi](./src/plugins/cakedefi.ts)
 - [BlockFi](./src/plugins/blockfi.ts)
 - [Etherscan/Polygonscan](./src/plugins/etherscan.ts)
+- [Youhodler](./src/plugins/youhodler.ts)
 
 ## Contribute
 
@@ -41,6 +42,7 @@ You can donate any ETH based coins using my ETH address: `0xf675F37AA8Db2d0424EB
 Also please use my referral code when creating an account for
 - [CakeDefi](https://app.cakedefi.com/?ref=604069) - Code `604069`
 - [BlockFi](https://blockfi.com/?ref=ce5c942d) - Code `ce5c942d`
+- [Youhodler](https://track.youhodler.com/click?pid=875&offer_id=2&sub2=github)
 
 
 ---
