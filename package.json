@@ -57,6 +57,7 @@
   },
   "dependencies": {
     "inversify": "^5.1.1",
+    "moment": "^2.29.1",
     "node-fetch": "2.6.1",
     "reflect-metadata": "^0.1.13",
     "yargs": "^17.1.1"
