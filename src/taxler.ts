@@ -1,9 +1,10 @@
 import CommonIO from './io/common-io';
 import PluginRegistry from './plugins/plugin-registry';
-import Plugin from './plugins/common/plugin';
+import Plugin, { COLUMN } from './plugins/common/plugin';
 import { EOL } from 'os';
 import { injectable } from 'inversify';
 import ConfigHelper from './common/config';
+import Coingecko from './apis/coingecko';
 
 @injectable()
 export default class Taxler {
@@ -53,7 +54,7 @@ export default class Taxler {
   public async csvReport() {
     const report = await this._getReport();
     let csvReport: string =
-      'Date, Type, Name, Coin, Amount, Price, Total, Taxes' + EOL;
+      'Date, Type, Plugin, Symbol, Coin, Amount, Price, Total, Taxes' + EOL;
 
     for (let line of report) {
       csvReport += line.join(',') + EOL;
@@ -66,18 +67,51 @@ export default class Taxler {
     this._print(await this._getReport());
   }
 
-  private _print(report: string[][]) {
+  private async _print(report: string[][]) {
     let income = 0.0;
     let taxes = 0.0;
+    const coins = new Map();
     report.forEach((line: string[]) => {
-      const type = line[1];
+      const type = line[COLUMN.TYPE];
       if (type !== 'Deposit' && type !== 'Withdraw') {
-        income += parseFloat(line[6]);
+        income += parseFloat(line[COLUMN.TOTAL]);
+        taxes += parseFloat(line[COLUMN.TAXES]);
+        const coinData = coins.get(line[COLUMN.COIN_SYMBOL]);
+        if (coinData) {
+          coins.set(line[COLUMN.COIN_SYMBOL], {
+            total: coinData.total + parseFloat(line[COLUMN.AMOUNT]),
+            name: line[COLUMN.COIN_NAME],
+          });
+        } else {
+          coins.set(line[COLUMN.COIN_SYMBOL], {
+            total: parseFloat(line[COLUMN.AMOUNT]),
+            name: line[COLUMN.COIN_NAME],
+          });
+        }
       }
-      taxes += parseFloat(line[7]);
       console.log(line.join());
     });
-    console.log(income + ', ' + taxes);
+
+    const api = new Coingecko();
+    let currentIncome = 0;
+    for (let { name, value: coinData } of Array.from(
+      coins,
+      ([name, value]) => ({
+        name,
+        value,
+      })
+    )) {
+      const price = await api.getPrice(name, new Date(), coinData.name);
+      if (!price) {
+        continue;
+      }
+      const currentValue = price.price * coinData.total;
+      currentIncome += currentValue;
+      console.log(`${name}: ${currentValue}`);
+    }
+    console.log(
+      `Income: ${income} (current value: ${currentIncome}), Taxes: ${taxes}`
+    );
   }
 
   private _getPlugin(name: string): Plugin | undefined {

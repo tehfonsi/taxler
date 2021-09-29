@@ -16,15 +16,19 @@ export default class Etherscan extends Plugin {
     const timestamp = parseInt(csvTimestamp);
     const date = new Date(timestamp * 1000);
     const price = await this._api.getPrice(csvToken, date);
+    if (!price || price.price <= 0) {
+      return null;
+    }
     const amount = parseFloat(csvAmount);
 
     return this.toRow(
       date,
       TRANSACTION_TYPE.MINING,
       'Etherscan',
-      csvToken,
+      price.coin.name,
+      price.coin.symbol,
       amount,
-      price
+      price.price
     );
   }
 }

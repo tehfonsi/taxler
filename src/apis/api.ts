@@ -1,5 +1,11 @@
 import fetch from 'node-fetch';
 import Cache from '../common/cache';
+import { Coin } from '../plugins/common/plugin';
+
+export type Price = {
+  price: number;
+  coin: Coin;
+};
 
 export default class Api {
   public async getJson(url: string) {

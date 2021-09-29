@@ -27,6 +27,12 @@ const init = async () => {
       default: defaultPath,
       nargs: 1,
     })
+    .option('d', {
+      alias: 'debug',
+      describe: 'Show extended console output',
+      type: 'boolean',
+      default: false,
+    })
     .command(
       ['init', 'i'],
       'Setup the current folder, see --path',
@@ -38,9 +44,9 @@ const init = async () => {
     ).argv;
 
   if (!argv._.length) {
-    const { path } = argv;
+    const { path, debug } = argv;
     const taxler = getTaxler(path as string);
-    if (isDev) {
+    if (isDev || debug) {
       taxler.csvReport();
       taxler.printReport();
     } else {

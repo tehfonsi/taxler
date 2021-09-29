@@ -6,6 +6,24 @@ import { DI } from '../../di.config';
 import CommonIO from '../../io/common-io';
 import CSVReader from '../../io/csv-reader';
 
+export type Coin = {
+  id: string;
+  name: string;
+  symbol: string;
+};
+
+export enum COLUMN {
+  DATE = 0,
+  TYPE = 1,
+  PLUGIN = 2,
+  COIN_NAME = 3,
+  COIN_SYMBOL = 4,
+  AMOUNT = 5,
+  PRICE = 6,
+  TOTAL = 7,
+  TAXES = 8,
+}
+
 export enum TRANSACTION_TYPE {
   UNKNOWN = 'Unkown',
   MINING = 'Mining',
@@ -35,8 +53,9 @@ export default abstract class Plugin {
   protected toRow(
     date: Date,
     type: TRANSACTION_TYPE,
+    plugin: string,
     name: string,
-    coin: string,
+    symbol: string,
     amount: number,
     price: number,
     total?: number
@@ -46,8 +65,9 @@ export default abstract class Plugin {
     return [
       formateReportDate(date),
       type.toString(),
+      plugin,
       name,
-      coin,
+      symbol,
       amount.toFixed(DECIMAL_PLACES),
       _price,
       _total.toFixed(DECIMAL_PLACES),

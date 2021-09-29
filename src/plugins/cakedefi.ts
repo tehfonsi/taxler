@@ -16,7 +16,16 @@ export default class CakeDefi extends Plugin {
     const amount = parseFloat(line[2]);
     const total = parseFloat(line[4]);
 
-    const row = this.toRow(date, type, 'Cake Defi', coin, amount, 0, total);
+    const row = this.toRow(
+      date,
+      type,
+      'Cake Defi',
+      'DeFiChain',
+      coin,
+      amount,
+      0,
+      total
+    );
     return Promise.resolve(row);
   }
 
@@ -32,6 +41,9 @@ export default class CakeDefi extends Plugin {
     }
     if (input.includes('Signup bonus')) {
       return TRANSACTION_TYPE.GIFT;
+    }
+    if (input.includes('Deposit')) {
+      return TRANSACTION_TYPE.DEPOSIT;
     }
     return TRANSACTION_TYPE.UNKNOWN;
   }

@@ -18,7 +18,19 @@ export default class Youhodler extends Plugin {
     const amount = parseFloat(line[7]);
     const price = await this._api.getPrice(coin, date);
 
-    const row = this.toRow(date, type, 'Youhodler', coin, amount, price);
+    if (!price) {
+      return Promise.resolve(null);
+    }
+
+    const row = this.toRow(
+      date,
+      type,
+      'Youhodler',
+      price.coin.name,
+      price.coin.symbol,
+      amount,
+      price.price
+    );
     return Promise.resolve(row);
   }
 

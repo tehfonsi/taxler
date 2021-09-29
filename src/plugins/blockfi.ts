@@ -16,7 +16,19 @@ export default class BlockFi extends Plugin {
     const amount = parseFloat(line[1]);
     const price = await this._api.getPrice(line[0], date);
 
-    const row = this.toRow(date, type, 'BlockFi', coin, amount, price);
+    if (!price) {
+      return Promise.resolve(null);
+    }
+
+    const row = this.toRow(
+      date,
+      type,
+      'BlockFi',
+      price.coin.name,
+      price.coin.symbol,
+      amount,
+      price?.price
+    );
     return Promise.resolve(row);
   }
 
@@ -26,6 +38,9 @@ export default class BlockFi extends Plugin {
     }
     if (input.includes('Bonus Payment')) {
       return TRANSACTION_TYPE.GIFT;
+    }
+    if (input.includes('Deposit')) {
+      return TRANSACTION_TYPE.DEPOSIT;
     }
     return TRANSACTION_TYPE.UNKNOWN;
   }
