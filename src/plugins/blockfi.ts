@@ -12,7 +12,6 @@ export default class BlockFi extends Plugin {
       return Promise.resolve(null);
     }
     const date = new Date(Date.parse(line[3]));
-    const coin = line[0];
     const amount = parseFloat(line[1]);
     const price = await this._api.getPrice(line[0], date);
 
