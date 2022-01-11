@@ -73,7 +73,12 @@ export default class Taxler {
     const coins = new Map();
     report.forEach((line: string[]) => {
       const type = line[COLUMN.TYPE];
-      if (type !== 'Deposit' && type !== 'Withdraw') {
+      if (
+        type === 'Lending' ||
+        type === 'Mining' ||
+        type === 'Liquidity Mining' ||
+        type === 'Staking'
+      ) {
         income += parseFloat(line[COLUMN.TOTAL]);
         taxes += parseFloat(line[COLUMN.TAXES]);
         const coinData = coins.get(line[COLUMN.COIN_SYMBOL]);
