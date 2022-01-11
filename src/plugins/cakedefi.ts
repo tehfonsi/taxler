@@ -33,6 +33,9 @@ export default class CakeDefi extends Plugin {
     if (input.includes('Liquidity mining reward')) {
       return TRANSACTION_TYPE.LIQUIDITY_MINING;
     }
+    if (input.includes('Lending reward')) {
+      return TRANSACTION_TYPE.LENDING;
+    }
     if (
       input.includes('Staking reward') ||
       input.includes('Freezer staking bonus')
@@ -44,6 +47,14 @@ export default class CakeDefi extends Plugin {
     }
     if (input.includes('Deposit')) {
       return TRANSACTION_TYPE.DEPOSIT;
+    }
+    if (input.includes('Withdrawal')) {
+      return TRANSACTION_TYPE.WITHDRAW;
+    }
+    if (
+      input.includes('Swapped in') || 
+      input.includes('Swapped out')) {
+      return TRANSACTION_TYPE.TRADING;
     }
     return TRANSACTION_TYPE.UNKNOWN;
   }
