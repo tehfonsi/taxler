@@ -3,6 +3,9 @@ import CakeDefi from './cakedefi';
 import Etherscan from './etherscan';
 import Plugin from './common/plugin';
 import Youhodler from './youhodler';
+import DefaultPlugin from './default-plugin';
+import Binance from './binance';
+import Bitpanda from './bitpanda';
 
 export default class PluginRegistry {
   public static getPlugins(): Plugin[] {
@@ -12,6 +15,9 @@ export default class PluginRegistry {
     directory.push(new CakeDefi());
     directory.push(new BlockFi());
     directory.push(new Youhodler());
+    directory.push(new DefaultPlugin());
+    directory.push(new Binance());
+    directory.push(new Bitpanda());
 
     return directory;
   }
