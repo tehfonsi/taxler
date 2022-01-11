@@ -29,6 +29,12 @@ export default class Coingecko extends Api {
       return this._getCoin(candidate);
     } else if (candidates.length > 0) {
       return this._getCoin(candidates[0]);
+    } else if (this._config.fiat === symbol) {
+      return {
+        id: symbol.toUpperCase(),
+        name: symbol.toUpperCase(),
+        symbol: symbol.toUpperCase(),
+      };
     } else {
       console.warn(`Coin ${symbol} not found!`);
     }
@@ -51,6 +57,13 @@ export default class Coingecko extends Api {
     const coin = await this.findMatch(symbol, name);
     if (!coin?.id) {
       return null;
+    }
+    // return if it is fiat
+    if (coin.symbol.toLowerCase() === this._config.fiat.toLowerCase()) {
+      return {
+        price: 1,
+        coin,
+      };
     }
     const dateString =
       date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
