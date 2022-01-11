@@ -60,6 +60,7 @@ export default abstract class Plugin {
     price: number,
     total?: number
   ): string[] {
+    amount = Math.abs(amount);
     const _total = total === undefined ? amount * price : total;
     const _price = price > 0 ? price.toFixed(DECIMAL_PLACES) : '0';
     return [
@@ -87,7 +88,7 @@ export default abstract class Plugin {
       }
       const fileReport = await this._readFile(filePath);
       if (fileReport.length === 0) {
-        console.warn(`Possible problems with report for ${file}`);
+        console.warn(`Possible problems with report for ${filePath}`);
       }
       this._writeFileReport(filePath.replace('.csv', REPORT_FILE), fileReport);
       fileReport.forEach((row) => report.push(row));
