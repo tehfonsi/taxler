@@ -27,6 +27,7 @@ Open the [Stackblitz Taxler Demo](https://stackblitz.com/edit/taxler-demo-1-0-4?
 - [BlockFi](./src/plugins/blockfi.ts)
 - [Etherscan/Polygonscan](./src/plugins/etherscan.ts)
 - [Youhodler](./src/plugins/youhodler.ts)
+- [Bitpanda](./src/plugins/bitpanda.ts)
 
 ## Contribute
 
@@ -43,7 +44,7 @@ Also please use my referral code when creating an account for
 - [CakeDefi](https://app.cakedefi.com/?ref=604069) - Code `604069`
 - [BlockFi](https://blockfi.com/?ref=ce5c942d) - Code `ce5c942d`
 - [Youhodler](https://track.youhodler.com/click?pid=875&offer_id=2&sub2=github)
-
-
+- [Bitpanda](https://www.bitpanda.com/?ref=253327100783639469)
+  
 ---
 Crypto lookups are powered by [CoinGecko API](https://www.coingecko.com/en/api)!
