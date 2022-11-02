@@ -51,16 +51,34 @@ export default class Taxler {
     return report;
   }
 
-  public async csvReport() {
+  public async csvReport(groupBy: string | undefined) {
     const report = await this._getReport();
     let csvReport: string =
       'Date, Type, Plugin, Symbol, Coin, Amount, Price, Total, Taxes' + EOL;
 
+    const groups: any = {};
+
     for (let line of report) {
-      csvReport += line.join(',') + EOL;
+      const csvLine = line.join(',') + EOL;
+      csvReport += csvLine;
+
+      if (groupBy && (groupBy === 'coin' || groupBy === 'symbol')) {
+        const coin = line[4];
+        if (!groups[coin]) {
+          groups[coin] = '';
+        }
+        groups[coin] += csvLine;
+      }
     }
 
     CommonIO.writeFile(this._path + 'report.csv', csvReport);
+
+    Object.entries(groups).forEach(([coin, csvReport]) => {
+      CommonIO.writeFile(
+        this._path + `report_${coin}.csv`,
+        csvReport as string
+      );
+    });
   }
 
   public async printReport() {

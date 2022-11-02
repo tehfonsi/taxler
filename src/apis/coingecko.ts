@@ -70,7 +70,7 @@ export default class Coingecko extends Api {
     const data = await this.getJson(
       `${BASE_URL}/coins/${coin.id}/history?date=${dateString}`
     );
-    if (!data) {
+    if (!data || !data.market_data?.current_price[this._config.fiat]) {
       return null;
     }
     return {

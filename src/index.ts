@@ -15,7 +15,7 @@ const getTaxler = (path: string) => {
 
 const init = async () => {
   const isDev = process.env.NODE_ENV === 'development';
-  const defaultPath = isDev ? 'test/data/' : '.';
+  const defaultPath = isDev ? 'G:/Meine Ablage/Crypto/2021' : '.';
 
   const argv = await yargs(hideBin(process.argv))
     .scriptName('taxler')
@@ -25,6 +25,14 @@ const init = async () => {
       describe: 'Specif the path to your tax folder',
       type: 'string',
       default: defaultPath,
+      nargs: 1,
+    })
+    .option('by', {
+      alias: 'groupBy',
+      describe:
+        'Select how to group transactions, default is none, available: coin',
+      type: 'string',
+      default: undefined,
       nargs: 1,
     })
     .option('d', {
@@ -44,13 +52,13 @@ const init = async () => {
     ).argv;
 
   if (!argv._.length) {
-    const { path, debug } = argv;
+    const { path, debug, groupBy } = argv;
     const taxler = getTaxler(path as string);
     if (isDev || debug) {
-      taxler.csvReport();
+      taxler.csvReport(groupBy as string);
       taxler.printReport();
     } else {
-      taxler.csvReport();
+      taxler.csvReport(groupBy as string);
     }
   }
 };
