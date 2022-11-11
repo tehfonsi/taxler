@@ -51,9 +51,7 @@ export default class CakeDefi extends Plugin {
     if (input.includes('Withdrawal')) {
       return TRANSACTION_TYPE.WITHDRAW;
     }
-    if (
-      input.includes('Swapped in') || 
-      input.includes('Swapped out')) {
+    if (input.includes('Swapped in') || input.includes('Swapped out')) {
       return TRANSACTION_TYPE.TRADING;
     }
     return TRANSACTION_TYPE.UNKNOWN;

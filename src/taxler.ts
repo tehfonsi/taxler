@@ -51,12 +51,18 @@ export default class Taxler {
     return report;
   }
 
-  public async csvReport(groupBy: string | undefined) {
+  public async csvReport(
+    groupBy: string | undefined,
+    typeParam: string | undefined
+  ) {
     const report = await this._getReport();
-    let csvReport: string =
+    const headerLine =
       'Date, Type, Plugin, Symbol, Coin, Amount, Price, Total, Taxes' + EOL;
+    let csvReport: string = headerLine;
+    let csvTypeReport: string = headerLine;
 
     const groups: any = {};
+    const types = typeParam?.split(',')?.map((type) => type.toLowerCase());
 
     for (let line of report) {
       const csvLine = line.join(',') + EOL;
@@ -65,13 +71,23 @@ export default class Taxler {
       if (groupBy && (groupBy === 'coin' || groupBy === 'symbol')) {
         const coin = line[4];
         if (!groups[coin]) {
-          groups[coin] = '';
+          groups[coin] = headerLine;
         }
         groups[coin] += csvLine;
       }
+
+      if (types && types.includes(line[1]?.toLowerCase())) {
+        csvTypeReport += csvLine;
+      }
     }
 
-    CommonIO.writeFile(this._path + 'report.csv', csvReport);
+    CommonIO.writeFile(this._path + 'report_full.csv', csvReport);
+    if (types) {
+      CommonIO.writeFile(
+        this._path + `report_by_types_${types.join(',')}.csv`,
+        csvTypeReport
+      );
+    }
 
     Object.entries(groups).forEach(([coin, csvReport]) => {
       CommonIO.writeFile(

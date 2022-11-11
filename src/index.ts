@@ -35,6 +35,14 @@ const init = async () => {
       default: undefined,
       nargs: 1,
     })
+    .option('t', {
+      alias: 'type',
+      describe:
+        'Select which type of transaction type you want to filter for. You can select mutliple seperated with comma. Find all TRANSACTION_TYPE in plugin.ts',
+      type: 'string',
+      default: undefined,
+      nargs: 1,
+    })
     .option('d', {
       alias: 'debug',
       describe: 'Show extended console output',
@@ -52,13 +60,16 @@ const init = async () => {
     ).argv;
 
   if (!argv._.length) {
-    const { path, debug, groupBy } = argv;
+    const { path, debug, groupBy, type } = argv;
     const taxler = getTaxler(path as string);
     if (isDev || debug) {
-      taxler.csvReport(groupBy as string);
+      taxler.csvReport(
+        (groupBy as string) || 'symbol',
+        (type as string) || 'staking,liquiditymining,lending'
+      );
       taxler.printReport();
     } else {
-      taxler.csvReport(groupBy as string);
+      taxler.csvReport(groupBy as string, type as string);
     }
   }
 };

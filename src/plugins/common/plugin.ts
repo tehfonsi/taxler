@@ -27,7 +27,7 @@ export enum COLUMN {
 export enum TRANSACTION_TYPE {
   UNKNOWN = 'Unkown',
   MINING = 'Mining',
-  LIQUIDITY_MINING = 'Liquidity Mining',
+  LIQUIDITY_MINING = 'LiquidityMining',
   LENDING = 'Lending',
   STAKING = 'Staking',
   TRADING = 'Trading',
