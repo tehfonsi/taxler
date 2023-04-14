@@ -35,3 +35,5 @@ export const mergeDeep = (target: any, ...sources: any[]): any => {
 
   return mergeDeep(target, ...sources);
 };
+
+export const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));

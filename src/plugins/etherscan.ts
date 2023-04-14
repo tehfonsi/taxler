@@ -7,10 +7,11 @@ export default class Etherscan extends Plugin {
 
   // "Txhash","UnixTimestamp","DateTime","From","To","Value","ContractAddress","TokenName","TokenSymbol"
   // "Txhash","UnixTimestamp","DateTime","From","To","TokenValue","USDValueDayOfTx","ContractAddress","TokenName","TokenSymbol"
+  // "Txhash","Blockno","UnixTimestamp","DateTime","From","To","TokenValue","USDValueDayOfTx","ContractAddress","TokenName","TokenSymbol"
   async convertRow(line: string[]): Promise<string[] | null> {
-    const csvToken = line[9] || line[8];
-    const csvTimestamp = line[1];
-    const csvAmount = line[5];
+    const csvToken = line[10] || line[9] || line[8];
+    const csvTimestamp = line[2];
+    const csvAmount = line[6];
     if (!csvToken || !csvTimestamp) {
       console.warn(
         `Token (${csvToken}) or timestamp (${csvTimestamp}) not found!)`
