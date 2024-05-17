@@ -51,7 +51,6 @@ You can donate any ETH based coins using my ETH address: `0xf675F37AA8Db2d0424EB
 
 Also please use my referral code when creating an account for
 - [CakeDefi](https://app.cakedefi.com/?ref=604069) - Code `604069`
-- [BlockFi](https://blockfi.com/?ref=ce5c942d) - Code `ce5c942d`
 - [Youhodler](https://track.youhodler.com/click?pid=875&offer_id=2&sub2=github)
 - [Bitpanda](https://www.bitpanda.com/?ref=253327100783639469)
 - [Binance](https://www.binance.com/en/activity/referral-entry?fromActivityPage=true&ref=LIMIT_HNR7LRVP) - Code `LIMIT_HNR7LRVP`
