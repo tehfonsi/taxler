@@ -33,8 +33,8 @@ Open the [Stackblitz Taxler Demo](https://stackblitz.com/edit/taxler-demo-1-0-4?
 ## Price APIs
 
 Currently supported APIs to fetch historical data are:
-- [CoinGecko API](https://www.coingecko.com/en/api)!
-- [CryptoCompare API](https://min-api.cryptocompare.com/)!
+- [CoinGecko API](https://www.coingecko.com/en/api)
+- [CryptoCompare API](https://min-api.cryptocompare.com/)
 
 Enter your API key in the `config.json` file which is generated with the `init` command.
 
