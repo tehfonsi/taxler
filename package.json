@@ -65,5 +65,8 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "tag": "latest"
+  },
+  "volta": {
+    "node": "20.12.2"
   }
 }
