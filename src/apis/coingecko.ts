@@ -3,7 +3,7 @@ import { DI } from '../di.config';
 import { Coin } from '../plugins/common/plugin';
 import Api, { Price } from './api';
 
-const BASE_URL = 'https://api.coingecko.com/api/v3';
+const BASE_URL = 'https://pro-api.coingecko.com/api/v3';
 
 export default class Coingecko extends Api {
   private _config: Config = DI().get('Config');
@@ -11,7 +11,8 @@ export default class Coingecko extends Api {
   public async findMatch(symbol: string, name?: string): Promise<Coin | null> {
     symbol = symbol.toLowerCase();
     const list = (await this.getJson(
-      BASE_URL + '/coins/list?include_platform=false'
+      BASE_URL +
+        `/coins/list?include_platform=false&x_cg_pro_api_key=${this._config.coingecko_api_key}`
     )) as Array<any>;
     if (!list) {
       return Promise.resolve(null);
@@ -67,9 +68,8 @@ export default class Coingecko extends Api {
     }
     const dateString =
       date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
-    const data = await this.getJson(
-      `${BASE_URL}/coins/${coin.id}/history?date=${dateString}`
-    );
+    let url = `${BASE_URL}/coins/${coin.id}/history?date=${dateString}&x_cg_pro_api_key=${this._config.coingecko_api_key}`;
+    const data = await this.getJson(url);
     if (!data || !data.market_data?.current_price[this._config.fiat]) {
       return null;
     }
