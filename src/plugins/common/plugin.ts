@@ -5,6 +5,8 @@ import { formateReportDate } from '../../common/utils';
 import { DI } from '../../di.config';
 import CommonIO from '../../io/common-io';
 import CSVReader from '../../io/csv-reader';
+import CryptoCompare from '../../apis/cryptocompare';
+import Api from '../../apis/api';
 
 export type Coin = {
   id: string;
@@ -44,7 +46,16 @@ const REPORT_FILE = '_report.csv';
 
 export default abstract class Plugin {
   private _config: Config = DI().get('Config');
-  protected _api = new Coingecko();
+  protected _api: CryptoCompare | Coingecko;
+
+  constructor() {
+    if (this._config.cryptocompare_api_key) {
+      this._api = new CryptoCompare();
+    }
+    if (this._config.coingecko_api_key) {
+      this._api = new Coingecko();
+    }
+  }
 
   public abstract getNames(): string[];
 
@@ -112,7 +123,11 @@ export default abstract class Plugin {
     const report: string[][] = [];
     const csv = CSVReader.read(path);
 
-    for (const line of csv) {
+    for (let i = 0; i < csv.length; i++) {
+      console.log(
+        `${this.getNames()[0]}: processing line ${i} of ${csv.length}`
+      );
+      const line = csv[i];
       const transformedLine = await this.convertRow(line);
       if (transformedLine) {
         report.push(transformedLine);

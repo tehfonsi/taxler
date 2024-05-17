@@ -30,6 +30,14 @@ Open the [Stackblitz Taxler Demo](https://stackblitz.com/edit/taxler-demo-1-0-4?
 - [Bitpanda](./src/plugins/bitpanda.ts)
 - [Binance](./src/plugins/binance.ts)
 
+## Price APIs
+
+Currently supported APIs to fetch historical data are:
+- [CoinGecko API](https://www.coingecko.com/en/api)!
+- [CryptoCompare API](https://min-api.cryptocompare.com/)!
+
+Enter your API key in the `config.json` file which is generated with the `init` command.
+
 ## Contribute
 
 You can contribute to this project by writing a new plugin.
@@ -48,5 +56,3 @@ Also please use my referral code when creating an account for
 - [Bitpanda](https://www.bitpanda.com/?ref=253327100783639469)
 - [Binance](https://www.binance.com/en/activity/referral-entry?fromActivityPage=true&ref=LIMIT_HNR7LRVP) - Code `LIMIT_HNR7LRVP`
   
----
-Crypto lookups are powered by [CoinGecko API](https://www.coingecko.com/en/api)!

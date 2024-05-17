@@ -12,6 +12,8 @@ export interface Config {
     liquidityMining: number;
     gift: number;
   };
+  coingecko_api_key?: string;
+  cryptocompare_api_key?: string;
 }
 
 export const DEFAULT_CONFIG: Config = {
@@ -24,6 +26,8 @@ export const DEFAULT_CONFIG: Config = {
     liquidityMining: 0,
     gift: 0,
   },
+  coingecko_api_key: '',
+  cryptocompare_api_key: '',
 };
 
 export default class ConfigHelper {

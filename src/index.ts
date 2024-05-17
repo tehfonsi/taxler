@@ -15,7 +15,7 @@ const getTaxler = (path: string) => {
 
 const init = async () => {
   const isDev = process.env.NODE_ENV === 'development';
-  const defaultPath = isDev ? 'G:/Meine Ablage/Crypto/2021' : '.';
+  const defaultPath = isDev ? 'G:/Meine Ablage/Crypto/2023' : '.';
 
   const argv = await yargs(hideBin(process.argv))
     .scriptName('taxler')

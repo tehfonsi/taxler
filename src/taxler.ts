@@ -3,12 +3,25 @@ import PluginRegistry from './plugins/plugin-registry';
 import Plugin, { COLUMN } from './plugins/common/plugin';
 import { EOL } from 'os';
 import { injectable } from 'inversify';
-import ConfigHelper from './common/config';
+import ConfigHelper, { Config } from './common/config';
 import Coingecko from './apis/coingecko';
+import CryptoCompare from './apis/cryptocompare';
+import { DI } from './di.config';
 
 @injectable()
 export default class Taxler {
+  private _config: Config = DI().get('Config');
   private _path: string;
+  private _api: Coingecko | CryptoCompare;
+
+  constructor() {
+    if (this._config.cryptocompare_api_key) {
+      this._api = new CryptoCompare();
+    }
+    if (this._config.coingecko_api_key) {
+      this._api = new Coingecko();
+    }
+  }
 
   public setPath(path: string) {
     this._path = path;
@@ -131,26 +144,27 @@ export default class Taxler {
       console.log(line.join());
     });
 
-    const api = new Coingecko();
-    let currentIncome = 0;
-    for (let { name, value: coinData } of Array.from(
-      coins,
-      ([name, value]) => ({
-        name,
-        value,
-      })
-    )) {
-      const price = await api.getPrice(name, new Date(), coinData.name);
-      if (!price) {
-        continue;
+    if (this._api) {
+      let currentIncome = 0;
+      for (let { name, value: coinData } of Array.from(
+        coins,
+        ([name, value]) => ({
+          name,
+          value,
+        })
+      )) {
+        const price = await this._api.getPrice(name, new Date(), coinData.name);
+        if (!price) {
+          continue;
+        }
+        const currentValue = price.price * coinData.total;
+        currentIncome += currentValue;
+        console.log(`${name}: ${currentValue}`);
       }
-      const currentValue = price.price * coinData.total;
-      currentIncome += currentValue;
-      console.log(`${name}: ${currentValue}`);
+      console.log(
+        `Income: ${income} (current value: ${currentIncome}), Taxes: ${taxes}`
+      );
     }
-    console.log(
-      `Income: ${income} (current value: ${currentIncome}), Taxes: ${taxes}`
-    );
   }
 
   private _getPlugin(name: string): Plugin | undefined {
