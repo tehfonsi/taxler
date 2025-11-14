@@ -17,17 +17,25 @@ export default class CryptoCompare extends Api {
     }
     symbol = symbol.toLowerCase();
     if (!coinList) {
-      const response = (await this.getJson(
+      const response = await this.getJson(
         BASE_URL + `/data/all/coinlist`
-      )) as Array<any>;
+      )
       if (!response) {
         return Promise.resolve(null);
       }
 
-      coinList = Object.values((response as any).Data);
+      coinList = [];
+
+      for (const [key, value] of Object.entries((response as any).Data)) {
+        coinList.push({
+          id: (value as any).Id,
+          name: (value as any).CoinName,
+          symbol: (value as any).Symbol.toUpperCase(),
+        });
+      }
     }
     const candidates = coinList.filter(
-      (coin: any) => coin.Symbol.toLowerCase() === symbol
+      (coin: any) => coin.symbol.toLowerCase() === symbol
     );
     let coin = null;
     if (candidates.length > 1 && !name) {
@@ -57,9 +65,9 @@ export default class CryptoCompare extends Api {
 
   private _getCoin(match: any): Coin {
     return {
-      id: match.Id as string,
-      name: match.CoinName as string,
-      symbol: (match.Symbol as string).toUpperCase(),
+      id: match.id as string,
+      name: match.name as string,
+      symbol: (match.symbol as string).toUpperCase(),
     };
   }
 

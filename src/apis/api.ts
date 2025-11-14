@@ -11,7 +11,7 @@ export type Price = {
 export default class Api {
   public async getJson(url: string): Promise<any | null> {
     const cachedText = Cache.get(url);
-    if (cachedText) {
+    if (cachedText && !cachedText.includes('Error')) {
       return JSON.parse(cachedText);
     }
     const response = await fetch(url);
@@ -19,6 +19,10 @@ export default class Api {
       const text = await response.text();
       Cache.write(url, text);
       return JSON.parse(text);
+    }
+    if (response.status > 299) {
+      console.error(`Error ${response.status} for ${url}`);
+      return null;
     }
     if (response.status === 429) {
       console.log(
